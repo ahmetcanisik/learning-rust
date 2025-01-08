@@ -1,6 +1,6 @@
 name: Build cross platform
 run-name: The ${{ github.repository }} building for a windows and linux.
-on: [ push ]
+on: [push]
 jobs:
   Building-Linux:
     runs-on: ubuntu-latest
@@ -14,15 +14,15 @@ jobs:
       - name: "Add Linux target to rustup"
         run: rustup target add x86_64-unknown-linux-gnu
 
-      - run: cd projects/guessing_game
       - name: "Build"
         run: cargo build --target x86_64-unknown-linux-gnu --release
+        working-directory: projects/guessing_game
 
   Building-Windows:
     runs-on: windows-latest
     steps:
       - name: "Install Rust"
-        run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
+        run: Invoke-WebRequest -Uri https://sh.rustup.rs -OutFile rustup-init.exe; Start-Process -Wait -FilePath rustup-init.exe -ArgumentList "-y"
 
       - name: "Update Rust"
         run: rustup update
@@ -30,7 +30,6 @@ jobs:
       - name: "Add Windows target to rustup"
         run: rustup target add x86_64-pc-windows-gnu
 
-      - run: cd projects/guessing_game
       - name: "Build"
         run: cargo build --target x86_64-pc-windows-gnu --release
-
+        working-directory: projects/guessing_game
