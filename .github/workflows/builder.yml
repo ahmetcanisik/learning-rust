@@ -1,0 +1,34 @@
+name: Build cross platform
+run-name: The ${{ github.repository }} building for a windows and linux.
+on: [push]
+jobs:
+    Building-Linux:
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Install Rust"
+                run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+            - name: "Update Rust"
+                run: rustup update
+
+            - name: "Add Linux target to rustup"
+                run: rustup target add x86_64-unknown-linux-gnu
+            
+            - name: "Build"
+                run: cargo build --target x86_64-unknown-linux-gnu --release
+
+jobs:
+    Building-Windows:
+        runs-on: windows-latest
+        steps:
+            - name: "Install Rust"
+                run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+            - name: "Update Rust"
+                run: rustup update
+
+            - name: "Add Windows target to rustup"
+                run: rustup target add dd x86_64-pc-windows-gnu
+            
+            - name: "Build"
+                run: cargo build --target dd x86_64-pc-windows-gnu --release
