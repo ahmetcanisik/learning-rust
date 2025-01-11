@@ -6,7 +6,7 @@ repository = "https://github.com/ahmetcanisik/learning-rust/tree/main/projects/g
 keywords = ["guess", "guessing_game", "guessing", "game", "terminal_game"]
 categories = ["games"]
 readme = "README.md"
-license = "LICENSE"
+license = "MIT OR Apache-2.0"
 version = "0.1.0"
 edition = "2021"
 
